@@ -1,3 +1,5 @@
+const mongoose = require('mongoes');
+const mongoDB = 'mongodb+srv://admin:admin@cluster0.qhknrgt.mongodb.net/?retryWrites=true&w=majority'
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -13,7 +15,9 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+  console.log("connected");
+}).catch(err => console.error(err));
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
