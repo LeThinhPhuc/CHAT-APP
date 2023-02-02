@@ -12,9 +12,9 @@ function Chat({ socket, username, room }) {
         author: username,
         message: currentMessage,
         time:
-          new Date(Date.now()).getHours() +
+          `0${new Date(Date.now()).getHours()}`.slice(-2) +
           ":" +
-          new Date(Date.now()).getMinutes(),
+          `0${new Date(Date.now()).getMinutes()}`.slice(-2) ,
       };
 
       await socket.emit("send_message", messageData);
@@ -32,7 +32,15 @@ function Chat({ socket, username, room }) {
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <p>Live Chat</p>
+        {/* {messageList[0].username} */}
+        <div className="child1" style={{textAlign:"center", paddingTop:"12px"}}>User : <span style={{fontWeight:"bold"}}>{username}</span></div>
+        <div className="child2">
+        
+        <p style={{display:"flex",paddingLeft:"5px"}}><div style={{marginTop:"6px", marginRight:"5px",width:"10px", height:"10px", backgroundColor:"#4ef037", borderRadius:"150px"}}></div>Live Chat</p>
+        
+        ID ROOM : <span style={{fontWeight:"bold"}}>{room}</span>
+        </div>
+       
       </div>
       <div className="chat-body">
         <ScrollToBottom className="message-container">
@@ -60,7 +68,7 @@ function Chat({ socket, username, room }) {
         <input
           type="text"
           value={currentMessage}
-          placeholder="Hey..."
+          placeholder="Your message..."
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
@@ -68,7 +76,7 @@ function Chat({ socket, username, room }) {
             event.key === "Enter" && sendMessage();
           }}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button onClick={sendMessage} style={{color:`${currentMessage?"#43a047":""}`}}>&#9658;</button> 
       </div>
     </div>
   );
