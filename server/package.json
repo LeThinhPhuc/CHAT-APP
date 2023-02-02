@@ -12,7 +12,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "nodemon": "^2.0.12",
+    "mongoose": "^6.9.0",
+    "nodemon": "^2.0.20",
+    "server": "^1.0.38",
     "socket.io": "^4.1.3"
   }
 }
